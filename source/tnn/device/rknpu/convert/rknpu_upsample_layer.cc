@@ -38,12 +38,15 @@ Status RknpuUpsampleLayer::Convert() {
     // output
     ADD_OUTPUT_OP();
 
-    rk::nn::UpsampleAttr attr;
+    rk::nn::ResizeAttr attr;
 
     auto output_dims = output_ops_[0]->GetDims();
     attr.sizes.assign(output_dims.end() - 2, output_dims.end());
+    attr.mode           = rk::nn::InterpolationMode::BILINEAR;
+    attr.transfrom_mode = rk::nn::CoordTransformMode::ALIGN_CORNERS;
+    attr.scale = 0.f;
 
-    graph_->AddOperator(rk::nn::OperatorType::UPSAMPLE, inputs, output_ops_, (void *)&attr);
+    graph_->AddOperator(rk::nn::OperatorType::RESIZE, inputs, output_ops_, (void *)&attr);
 
     return ret;
 }
