@@ -35,6 +35,7 @@ nvinfer1::DataType SoftmaxTRTPluginLayerBuilder::getOutputDataType(int index, co
 }
 
 ILayer* SoftmaxTRTPluginLayerBuilder::AddToNetwork(INetworkDefinition* network) {
+    /*
     auto paramlist = dynamic_cast<SoftmaxLayerParam*>(param_);
     if (paramlist->axis == 1) {
         auto foreign_tensor = dynamic_cast<ForeignBlob*>(input_blobs_[0])->GetForeignTensor();
@@ -50,20 +51,25 @@ ILayer* SoftmaxTRTPluginLayerBuilder::AddToNetwork(INetworkDefinition* network) 
             input_tensor = layer->getOutput(0);
         }
 
-        ISoftMaxLayer* layar = network->addSoftMax(*input_tensor);
-        if (layar != nullptr) {
-            layar->setName(layer_name_.c_str());
+        ISoftMaxLayer* softmax_layer = network->addSoftMax(*input_tensor);
+        if (softmax_layer != nullptr) {
+            softmax_layer->setName(layer_name_.c_str());
+            softmax_layer->setAxes(1 << paramlist->axis);
+            printf("softmax axes:0x%x\n", softmax_layer->getAxes());
         }
+        layer = softmax_layer;
 
         auto output_dims = output_blobs_[0]->GetBlobDesc().dims;
         //squeeze
         if(output_dims.size() < 4) {
             layer = AddReshapeToNetwork(network, input_tensor, output_dims, (layer_name_ + "squeeze").c_str());
         }
-        return layar;
+        return layer;
     } else {
         return TensorRTPluginLayerBuilder::AddToNetwork(network);
     }
+    */
+    return TensorRTPluginLayerBuilder::AddToNetwork(network);
 }
 
 DimsExprs SoftmaxTRTPluginLayerBuilder::getOutputDimensions(int index, const nvinfer1::DimsExprs* inputs,

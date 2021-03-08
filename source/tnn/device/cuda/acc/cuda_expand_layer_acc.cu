@@ -149,6 +149,15 @@ Status CudaExpandLayerAcc::Forward(const std::vector<Blob *> &inputs, const std:
     auto input_dims = input_blob->GetBlobDesc().dims;
     auto output_dims = output_blob->GetBlobDesc().dims;
 
+    {
+        std::stringstream ss;
+        ss << "<" << input_blob->GetBlobDesc().name << "> shape:[";
+        for(int i: input_dims) {ss <<  i << ","; } ss << "] ";
+        ss << "<" << output_blob->GetBlobDesc().name << "> shape:[";
+        for(int i: output_dims) {ss <<  i << ","; } ss << "] ";
+        LOGD("Expand %s\n", ss.str().c_str()); 
+    }
+
     // expand input dims
     auto expanded_input_dims = input_dims;
     while(expanded_input_dims.size() < output_dims.size()) {

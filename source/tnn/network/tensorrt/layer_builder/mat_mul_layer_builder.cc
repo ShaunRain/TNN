@@ -14,6 +14,8 @@
 
 #include "tnn/network/tensorrt/layer_builder/tensorrt_layer_builder.h"
 
+#include <sstream>
+
 #include "tnn/core/macro.h"
 #include "tnn/network/tensorrt/utils.h"
 
@@ -70,6 +72,17 @@ ILayer* MatMulTRTLayerBuilder::AddToNetwork(INetworkDefinition* network) {
     auto dims_a = matrix_a->getDimensions();
     auto dims_b = matrix_b->getDimensions();
     int nbDimsDiff = std::abs(dims_a.nbDims - dims_b.nbDims);
+
+    {
+        std::stringstream ss;
+        ss << "matmul <<" << GetLayerName() <<">> shape:";
+        ss << "a <" << input_blobs_[0]->GetBlobDesc().name << "> shape:[";
+        for(int i=0;i<dims_a.nbDims;i++) {ss <<  dims_a.d[i] << ","; } ss << "] ";
+        ss << "<" << output_blobs_[0]->GetBlobDesc().name << "> shape:[";
+        for(int i=0;i<dims_b.nbDims;i++) {ss <<  dims_a.d[i] << ","; } ss << "] ";
+        LOGD("%s\n", ss.str().c_str()); 
+    }
+
     if (dims_a.nbDims > dims_b.nbDims)
     {
         nvinfer1::Dims new_dims = unsqueeze_trt_dims(dims_b, nbDimsDiff);

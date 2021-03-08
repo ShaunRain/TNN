@@ -12,11 +12,12 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 
+#include "tnn/network/tensorrt/utils.h"
+
 #include <string.h>
 #include <string>
 #include <stdio.h>
 
-#include "tnn/network/tensorrt/utils.h"
 #include "tnn/core/macro.h"
 #include "tnn/utils/data_type_utils.h"
 
