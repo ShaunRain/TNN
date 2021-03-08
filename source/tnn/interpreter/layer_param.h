@@ -68,15 +68,22 @@ enum FusionType {
 
 struct BatchNormLayerParam : public LayerParam {
     int channels = 0;
-    float eps    = 0.f;
+    float eps    = 1e-5f;
 
     PARAM_COPY(BatchNormLayerParam)
 };
 struct InstanceNormLayerParam : public LayerParam {
     int channels = 0;
-    float eps    = 0.01f;
+    float eps    = 1e-5f;
 
     PARAM_COPY(InstanceNormLayerParam)
+};
+
+struct GroupNormLayerParam : public LayerParam {
+    int group = 0;
+    float eps = 1e-5f;
+
+    PARAM_COPY(GroupNormLayerParam)
 };
 
 struct ConvLayerParam : public LayerParam {
@@ -128,6 +135,10 @@ struct PoolingLayerParam : public LayerParam {
 
     // order [w h d] for adaptive pool
     std::vector<int> kernel_indexs;
+
+    int is_adaptive_pool = 0;
+    // order [w h d]
+    std::vector<int> output_shape;
 
     PARAM_COPY(PoolingLayerParam)
 };
@@ -575,6 +586,12 @@ struct RoiAlignLayerParam : public LayerParam {
 
     PARAM_COPY(RoiAlignLayerParam)
 
+};
+
+struct FlattenLayerParam : public LayerParam {
+    int axis = 1;
+
+    PARAM_COPY(FlattenLayerParam)
 };
 
 }  // namespace TNN_NS
