@@ -44,6 +44,14 @@ BlobManager::~BlobManager() {
     }
 }
 
+static void UpdateDeviceInputDataFormat(Blob *input, const DeviceType &type) {
+    if (type == DEVICE_ARM || type == DEVICE_METAL) {
+        input->GetBlobDesc().data_format = DATA_FORMAT_NC4HW4;
+    } else if (type == DEVICE_OPENCL) {
+        input->GetBlobDesc().data_format = DATA_FORMAT_NHC4W4;
+    }
+}
+
 Status BlobManager::Init(NetworkConfig &config, NetStructure *net_structure, InputShapesMap inputs_shape_map,
                          DataType input_data_type) {
     if (net_structure->blobs.empty()) {
@@ -105,7 +113,8 @@ Status BlobManager::Init(NetworkConfig &config, NetStructure *net_structure, Inp
         } else {
             current_blob->GetBlobDesc().data_type = input_data_type;
         }
-        input_blobs_[current_blob_name]       = current_blob;
+        UpdateDeviceInputDataFormat(current_blob, device_->GetDeviceType());
+        input_blobs_[current_blob_name]         = current_blob;
     }
 
     // output blobs
