@@ -15,3 +15,6 @@ endif()
 
 include_directories($ENV{OPENVINO_ROOT_DIR}/deployment_tools/inference_engine/include)
 include_directories($ENV{OPENVINO_ROOT_DIR}/deployment_tools/ngraph/include)
+
+add_executable(ie_test main.cpp)
+target_link_libraries(ie_test TNN)
