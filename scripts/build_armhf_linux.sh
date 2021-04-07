@@ -3,7 +3,7 @@
 SHARED_LIB="ON"
 ARM="ON"
 OPENMP="ON"
-OPENCL="OFF"
+OPENCL="ON"
 CC=/root/cross-pi-gcc-8.3.0-1/bin/arm-linux-gnueabihf-gcc
 CXX=/root/cross-pi-gcc-8.3.0-1/bin/arm-linux-gnueabihf-g++
 TARGET_ARCH=arm
@@ -19,8 +19,8 @@ cd build_armhf_linux
 cmake ${TNN_ROOT_PATH} \
     -DCMAKE_SYSTEM_NAME=Linux  \
     -DTNN_TEST_ENABLE=ON \
-    -DTNN_CPU_ENABLE=OFF \
-    -DDEBUG=OFF \
+    -DTNN_CPU_ENABLE=ON \
+    -DDEBUG=ON \
     -DCMAKE_C_COMPILER=$CC \
     -DCMAKE_CXX_COMPILER=$CXX \
     -DCMAKE_BUILD_TYPE=Release \
