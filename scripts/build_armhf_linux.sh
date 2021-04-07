@@ -4,8 +4,8 @@ SHARED_LIB="ON"
 ARM="ON"
 OPENMP="ON"
 OPENCL="OFF"
-CC=arm-linux-gnueabihf-gcc
-CXX=arm-linux-gnueabihf-g++
+CC=/root/cross-pi-gcc-8.3.0-1/bin/arm-linux-gnueabihf-gcc
+CXX=/root/cross-pi-gcc-8.3.0-1/bin/arm-linux-gnueabihf-g++
 TARGET_ARCH=arm
 
 if [ -z $TNN_ROOT_PATH ]

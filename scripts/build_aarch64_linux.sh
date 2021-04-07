@@ -4,8 +4,8 @@ SHARED_LIB="ON"
 ARM="ON"
 OPENMP="ON"
 OPENCL="OFF"
-CC=aarch64-linux-gnu-gcc
-CXX=aarch64-linux-gnu-g++
+CC=gcc-7-aarch64-linux-gnu-gcc
+CXX=gcc-7-aarch64-linux-gnu-g++
 TARGET_ARCH=aarch64
 
 if [ -z $TNN_ROOT_PATH ]

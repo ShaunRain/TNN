@@ -10,8 +10,8 @@ set(TNN_ARM_ENABLE ON)
 set(CMAKE_SYSTEM_PROCESSOR aarch64)
 
 
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O3 -std=c++11 -fPIC")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -std=c++11 -pthread -fPIC")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O3 -std=c++11 -fPIC -fopenmp")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -std=c++11 -pthread -fPIC -fopenmp")
 
 set(TNNRoot ${CMAKE_CURRENT_SOURCE_DIR}/../../)
 set(TNNInclude ${TNNRoot}/include)
@@ -30,3 +30,4 @@ file(GLOB_RECURSE UTIL_SRC "${CMAKE_SOURCE_DIR}/../utils/*.cc")
 
 add_executable(demo_arm_linux_imageclassify src/image_classify.cc ${BASE_SRC} ${UTIL_SRC})
 add_executable(demo_arm_linux_facedetector src/face_detector.cc ${BASE_SRC} ${UTIL_SRC})
+add_executable(demo_arm_linux_test src/test.cc ${BASE_SRC} ${UTIL_SRC})

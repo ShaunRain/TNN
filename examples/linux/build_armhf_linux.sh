@@ -1,7 +1,7 @@
 #!/bin/bash
 
-CC=arm-linux-gnueabihf-gcc
-CXX=arm-linux-gnueabihf-g++
+CC=/root/cross-pi-gcc-8.3.0-1/bin/arm-linux-gnueabihf-gcc
+CXX=/root/cross-pi-gcc-8.3.0-1/bin/arm-linux-gnueabihf-g++
 TNN_LIB_PATH=../../scripts/build_armhf_linux
 
 cd ../../scripts
