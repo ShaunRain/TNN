@@ -2,8 +2,8 @@
 
 SHARED_LIB="ON"
 ARM="ON"
-OPENMP="ON"
-OPENCL="ON"
+OPENMP="OFF"
+OPENCL="OFF"
 CC=/root/cross-pi-gcc-8.3.0-1/bin/arm-linux-gnueabihf-gcc
 CXX=/root/cross-pi-gcc-8.3.0-1/bin/arm-linux-gnueabihf-g++
 TARGET_ARCH=arm
