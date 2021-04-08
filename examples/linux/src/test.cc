@@ -64,7 +64,10 @@ int main(int argc, char** argv) {
     CHECK_TNN_STATUS(predictor->Init(option));
     //Predict
     auto image_mat = std::make_shared<TNN_NS::Mat>(TNN_NS::DEVICE_ARM, TNN_NS::N8UC3, nchw, data);
-    CHECK_TNN_STATUS(predictor->Predict(std::make_shared<TNNSDKInput>(image_mat), sdk_output));
+    
+    for (int i = 0;i<1000;i++) {
+    	CHECK_TNN_STATUS(predictor->Predict(std::make_shared<TNNSDKInput>(image_mat), sdk_output));
+    }
 
     int class_id = -1;
     if (sdk_output && dynamic_cast<TestClassifierOutput *>(sdk_output.get())) {
