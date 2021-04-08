@@ -53,7 +53,7 @@ int main(int argc, char** argv) {
     // else
     
     strncpy(input_imgfn, argv[3], 256);
-    
+
     printf("Classify is about to start, and the picrture is %s\n",input_imgfn);
 
     int image_width, image_height, image_channel;
@@ -63,7 +63,7 @@ int main(int argc, char** argv) {
     std::shared_ptr<TNNSDKOutput> sdk_output = predictor->CreateSDKOutput();
     CHECK_TNN_STATUS(predictor->Init(option));
     //Predict
-    auto image_mat = std::make_shared<TNN_NS::Mat>(TNN_NS::DEVICE_ARM, TNN_NS::NCHW_FLOAT, nchw, data);
+    auto image_mat = std::make_shared<TNN_NS::Mat>(TNN_NS::DEVICE_ARM, TNN_NS::N8UC3, nchw, data);
     CHECK_TNN_STATUS(predictor->Predict(std::make_shared<TNNSDKInput>(image_mat), sdk_output));
 
     int class_id = -1;
