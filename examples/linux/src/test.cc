@@ -48,10 +48,12 @@ int main(int argc, char** argv) {
     
     char img_buff[256];
     char *input_imgfn = img_buff;
-    if(argc < 6)
-        strncpy(input_imgfn, "../../assets/leijun.png", 256);
-    else
-        strncpy(input_imgfn, argv[5], 256);
+    // if(argc < 6)
+        // strncpy(input_imgfn, "../../assets/leijun.png", 256);
+    // else
+    
+    strncpy(input_imgfn, argv[3], 256);
+    
     printf("Classify is about to start, and the picrture is %s\n",input_imgfn);
 
     int image_width, image_height, image_channel;
